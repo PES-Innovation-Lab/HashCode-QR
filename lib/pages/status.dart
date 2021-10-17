@@ -23,6 +23,28 @@ class Status extends StatelessWidget {
         alignment: Alignment.center,
         child: ListView(
           children: <Widget>[
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 20, 20, 10),
+              child: Text(
+                "Name: Test",
+                style: TextStyle(
+                  color: Colors.green[400],
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+              child: Text(
+                "Team: Test",
+                style: TextStyle(
+                  color: Colors.green[400],
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             StatusCard(name: 'Check-In', status: true),
             StatusCard(name: 'Lunch (30th)', status: true),
             StatusCard(name: 'Dinner (30th)', status: true),
