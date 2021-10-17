@@ -23,7 +23,11 @@ class Status extends StatelessWidget {
         alignment: Alignment.center,
         child: ListView(
           children: <Widget>[
-            StatusCard(name: 'Test', status: true)
+            StatusCard(name: 'Check-In', status: true),
+            StatusCard(name: 'Lunch (30th)', status: true),
+            StatusCard(name: 'Dinner (30th)', status: true),
+            StatusCard(name: 'Breakfast (31st)', status: true),
+            StatusCard(name: 'Lunch (31st)', status: true),
           ],
         ),
       ),

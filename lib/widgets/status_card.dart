@@ -18,8 +18,6 @@ class StatusCard extends StatefulWidget {
 class _StatusCardState extends State<StatusCard> {
 
 
-
-
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -32,6 +30,7 @@ class _StatusCardState extends State<StatusCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
                   '${widget.name}',
@@ -40,7 +39,6 @@ class _StatusCardState extends State<StatusCard> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(width: 200,),
                 Text(
                   '${widget.status}',
                   style: TextStyle(
