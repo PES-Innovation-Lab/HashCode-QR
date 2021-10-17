@@ -21,10 +21,10 @@ class _StatusCardState extends State<StatusCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(20),
+      margin: EdgeInsets.fromLTRB(20, 20, 20, 10),
       color: Colors.green[400],
       child: Container(
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
+        padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
         alignment: Alignment.center,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,6 +69,8 @@ class _StatusCardState extends State<StatusCard> {
                   ],
                 ),
               ),
+            if (widget.status == false)
+              SizedBox(height: 10,),
           ],
         ),
       ),
