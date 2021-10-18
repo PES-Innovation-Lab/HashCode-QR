@@ -32,7 +32,7 @@ class DatabaseService {
   }
 
   getData () {
-    participantCollection.get().then((QuerySnapshot querySnapshot) {
+    participantCollection.where('id', isEqualTo: this.id).get().then((QuerySnapshot querySnapshot) {
       querySnapshot.docs.forEach((doc) {
         print('query ${doc['name']}');
       });
