@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 
 class Home extends StatelessWidget {
+  final Future<FirebaseApp> _fbApp =  Firebase.initializeApp();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +42,7 @@ class Home extends StatelessWidget {
                   width: 150,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/status');
+                      Navigator.pushReplacementNamed(context, '/loading');
                     },
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.green[400],
