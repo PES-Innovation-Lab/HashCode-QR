@@ -42,7 +42,7 @@ class Home extends StatelessWidget {
                   width: 150,
                   child: TextButton(
                     onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/loading');
+                      Navigator.pushNamed(context, '/loading');
                     },
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.green[400],

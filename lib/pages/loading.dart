@@ -15,8 +15,16 @@ class _LoadingState extends State<Loading> {
 
   late DatabaseService db;
 
+  User? user;
+
   _initFireBase  ()  async {
     await Firebase.initializeApp();
+  }
+
+  nextScreen () {
+    Future.delayed(Duration(seconds: 1), () {
+      Navigator.popAndPushNamed(context, '/status', arguments: user);
+    });
   }
 
   @override
@@ -26,10 +34,14 @@ class _LoadingState extends State<Loading> {
       db = DatabaseService(id: '1234');
     });
     db.getCollection();
-    db.getData();
+    db.getData().then((u) {
+      setState(() {
+        user = u;
+      });
+    });
     _initFireBase();
     print('db loaded');
-
+    nextScreen();
   }
 
   @override

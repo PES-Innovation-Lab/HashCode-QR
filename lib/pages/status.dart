@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:hashcode_qr/widgets/status_card.dart';
+import 'package:hashcode_qr/services/database.dart';
 
-class Status extends StatelessWidget {
+class Status extends StatefulWidget {
   const Status({Key? key}) : super(key: key);
 
   @override
+  _StatusState createState() => _StatusState();
+}
+
+class _StatusState extends State<Status> {
+
+  late User user;
+
+  @override
   Widget build(BuildContext context) {
+    user = ModalRoute.of(context)!.settings.arguments as User;
+    print("In status: $user");
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -26,7 +37,7 @@ class Status extends StatelessWidget {
             Container(
               margin: EdgeInsets.fromLTRB(20, 20, 20, 10),
               child: Text(
-                "Name: Test",
+                "Name: ${user.name}",
                 style: TextStyle(
                   color: Colors.green[400],
                   fontSize: 30,
@@ -37,7 +48,7 @@ class Status extends StatelessWidget {
             Container(
               margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: Text(
-                "Team: Test",
+                "Team: ${user.team}",
                 style: TextStyle(
                   color: Colors.green[400],
                   fontSize: 20,
@@ -45,11 +56,13 @@ class Status extends StatelessWidget {
                 ),
               ),
             ),
-            StatusCard(name: 'Check-In', status: true),
-            StatusCard(name: 'Lunch (30th)', status: true),
-            StatusCard(name: 'Dinner (30th)', status: true),
-            StatusCard(name: 'Breakfast (31st)', status: true),
-            StatusCard(name: 'Lunch (31st)', status: false),
+            StatusCard(name: 'Check-In', status: user.checkIn),
+            StatusCard(name: 'Breakfast (30th)', status: user.break30),
+            StatusCard(name: 'Lunch (30th)', status: user.lunch30),
+            StatusCard(name: 'Snacks (30th)', status: user.snacks30),
+            StatusCard(name: 'Dinner (30th)', status: user.dinner30),
+            StatusCard(name: 'Breakfast (31st)', status: user.break31),
+            StatusCard(name: 'Lunch (31st)', status: user.lunch31),
           ],
         ),
       ),

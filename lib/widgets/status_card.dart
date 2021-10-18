@@ -17,6 +17,21 @@ class StatusCard extends StatefulWidget {
 
 class _StatusCardState extends State<StatusCard> {
 
+  late String status_string;
+
+  void initState() {
+    super.initState();
+    String S;
+    if (widget.status == true) {
+      S = 'Completed';
+    }
+    else {
+      S = 'Not Done';
+    }
+    setState(() {
+      status_string = S;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +55,14 @@ class _StatusCardState extends State<StatusCard> {
                   ),
                 ),
                 Text(
-                  '${widget.status}',
+                  '$status_string',
                   style: TextStyle(
                   fontSize: 20,
                 ),
                 ),
               ],
             ),
-            if (widget.status == true)
+            if (widget.status == false)
               Container(
                 child: Column(
                   children: <Widget>[
@@ -57,7 +72,7 @@ class _StatusCardState extends State<StatusCard> {
                     TextButton(
                       onPressed: () {},
                       child: Text(
-                          "Test",
+                          "Mark as Completed",
                         style: TextStyle(
                           color: Colors.green[400]
                         ),
@@ -69,7 +84,7 @@ class _StatusCardState extends State<StatusCard> {
                   ],
                 ),
               ),
-            if (widget.status == false)
+            if (widget.status == true)
               SizedBox(height: 10,),
           ],
         ),
