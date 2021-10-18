@@ -84,8 +84,8 @@ class _StatusCardState extends State<StatusCard> {
                   ],
                 ),
               ),
-            if (widget.status == true)
-              SizedBox(height: 10,),
+            // if (widget.status == true)
+            //   SizedBox(height: 10,),
           ],
         ),
       ),
