@@ -22,6 +22,12 @@ class _StatusState extends State<Status> {
     // print("In status: $user");
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/home');
+          },
+        ),
         title: Text(
           "HashCode QR",
           style: TextStyle(

@@ -15,41 +15,55 @@ class _LoadingState extends State<Loading> {
 
   late DatabaseService db;
 
+  late String id;
+
+  int count = 0;
+
   late User user;
 
   _initFireBase  ()  async {
     await Firebase.initializeApp();
   }
 
-  nextScreen () {
-    Future.delayed(Duration(seconds: 2), () {
-      Navigator.popAndPushNamed(context, '/status', arguments: user);
+  nextScreen (User us) {
+    Future.delayed(Duration(seconds: 1, milliseconds: 500), () {
+      Navigator.popAndPushNamed(context, '/status', arguments: us);
     });
+  }
+
+  pullData () async {
+    setState(() {
+      db = DatabaseService(id: id);
+    });
+    db = DatabaseService(id: id);
+    db.getCollection();
+    User us;
+    us = await db.getData();
+    _initFireBase();
+    print('db loaded');
+    nextScreen(us);
   }
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      db = DatabaseService(id: '1234');
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      pullData();
     });
-    db.getCollection();
-    db.getData().then((u) {
-      print("loading $u");
-      setState(() {
-        user = u;
-      });
-    });
-    _initFireBase();
-    print('db loaded');
-    nextScreen();
   }
 
   @override
   Widget build(BuildContext context) {
+    id = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/home');
+          },
+        ),
         title: Text(
           "HashCode QR",
           style: TextStyle(

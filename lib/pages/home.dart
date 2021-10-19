@@ -15,7 +15,11 @@ class _HomeState extends State<Home> {
 
   final qrKey = GlobalKey(debugLabel: 'QR');
 
+
   QRViewController? controller;
+  String id = '';
+
+  int count = 0;
 
   Barcode? barcode;
 
@@ -106,10 +110,13 @@ class _HomeState extends State<Home> {
     });
 
     controller.scannedDataStream.listen((barcode) {
-      setState(() {
-        this.barcode = barcode;
-      });
-      print(barcode);
+      if (this.barcode == null) {
+        setState(() {
+          this.barcode = barcode;
+          id = barcode.code;
+        });
+        Navigator.pushReplacementNamed(context, '/loading', arguments: id);
+      }
     });
   }
 }
