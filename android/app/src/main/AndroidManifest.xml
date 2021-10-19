@@ -1,5 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hashcode_qr">
+    
+    <uses-permission android:name="android.permission.CAMERA" />
    <application
         android:label="hashcode_qr"
         android:icon="@mipmap/ic_launcher">
