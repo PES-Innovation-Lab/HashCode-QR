@@ -66,6 +66,25 @@ class _StatusState extends State<Status> {
             StatusCard(name: 'Dinner (30th)', status: user.dinner30, db: db, dbField: 'dinner30',),
             StatusCard(name: 'Breakfast (31st)', status: user.break31, db: db, dbField: 'break31',),
             StatusCard(name: 'Lunch (31st)', status: user.lunch31, db: db, dbField: 'lunch31',),
+            Center(
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.popAndPushNamed(context, '/loading', arguments: user.id);
+                  },
+                  child: Text(
+                    "Refresh",
+                    style: TextStyle(
+                        color: Colors.black
+                    ),
+                  ),
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.green[400]
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
