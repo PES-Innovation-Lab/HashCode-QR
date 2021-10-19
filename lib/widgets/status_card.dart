@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hashcode_qr/services/database.dart';
 
 class StatusCard extends StatefulWidget {
 
@@ -9,7 +10,13 @@ class StatusCard extends StatefulWidget {
   // Status of field
   late bool status;
 
-  StatusCard({required this.name, required this.status});
+  // DB field name
+  late String dbField;
+
+  //Database Service
+  late DatabaseService db;
+
+  StatusCard({required this.name, required this.status, required this.db, required this.dbField});
 
   @override
   _StatusCardState createState() => _StatusCardState();
@@ -19,8 +26,7 @@ class _StatusCardState extends State<StatusCard> {
 
   late String status_string;
 
-  void initState() {
-    super.initState();
+  updateStatus () {
     String S;
     if (widget.status == true) {
       S = 'Completed';
@@ -31,6 +37,12 @@ class _StatusCardState extends State<StatusCard> {
     setState(() {
       status_string = S;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    updateStatus();
   }
 
   @override
@@ -70,7 +82,14 @@ class _StatusCardState extends State<StatusCard> {
                       height: 10,
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        widget.db.getCollection();
+                        widget.db.updateData(widget.dbField);
+                        setState(() {
+                          widget.status = !widget.status;
+                        });
+                        updateStatus();
+                      },
                       child: Text(
                           "Mark as Completed",
                         style: TextStyle(

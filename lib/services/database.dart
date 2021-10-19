@@ -39,4 +39,10 @@ class DatabaseService {
     user = User(name: snapshot.docs[0]['name'], team: snapshot.docs[0]['team'], id: snapshot.docs[0]['id'], checkIn: snapshot.docs[0]['checkIn'], lunch30: snapshot.docs[0]['lunch30'], lunch31: snapshot.docs[0]['lunch31'], break30: snapshot.docs[0]['break30'], break31: snapshot.docs[0]['break31'], snacks30: snapshot.docs[0]['snacks30'], dinner30: snapshot.docs[0]['dinner30']);
     return user;
   }
+
+  updateData(String field) async {
+    print(field);
+    var snapshot = await participantCollection.where('id', isEqualTo: this.id).get();
+    await snapshot.docs[0].reference.update({field: !snapshot.docs[0][field]});
+  }
 }

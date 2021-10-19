@@ -13,10 +13,13 @@ class _StatusState extends State<Status> {
 
   late User user;
 
+  late DatabaseService db;
+
   @override
   Widget build(BuildContext context) {
     user = ModalRoute.of(context)!.settings.arguments as User;
-    print("In status: $user");
+    db = DatabaseService(id: user.id);
+    // print("In status: $user");
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -56,13 +59,13 @@ class _StatusState extends State<Status> {
                 ),
               ),
             ),
-            StatusCard(name: 'Check-In', status: user.checkIn),
-            StatusCard(name: 'Breakfast (30th)', status: user.break30),
-            StatusCard(name: 'Lunch (30th)', status: user.lunch30),
-            StatusCard(name: 'Snacks (30th)', status: user.snacks30),
-            StatusCard(name: 'Dinner (30th)', status: user.dinner30),
-            StatusCard(name: 'Breakfast (31st)', status: user.break31),
-            StatusCard(name: 'Lunch (31st)', status: user.lunch31),
+            StatusCard(name: 'Check-In', status: user.checkIn, db: db, dbField: 'checkIn',),
+            StatusCard(name: 'Breakfast (30th)', status: user.break30, db: db, dbField: 'break30',),
+            StatusCard(name: 'Lunch (30th)', status: user.lunch30, db: db, dbField: 'lunch30',),
+            StatusCard(name: 'Snacks (30th)', status: user.snacks30, db: db, dbField: 'snacks30',),
+            StatusCard(name: 'Dinner (30th)', status: user.dinner30, db: db, dbField: 'dinner30',),
+            StatusCard(name: 'Breakfast (31st)', status: user.break31, db: db, dbField: 'break31',),
+            StatusCard(name: 'Lunch (31st)', status: user.lunch31, db: db, dbField: 'lunch31',),
           ],
         ),
       ),
