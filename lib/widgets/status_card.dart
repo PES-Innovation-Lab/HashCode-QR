@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hashcode_qr/services/database.dart';
+import 'package:hashcode_qr/widgets/popup.dart';
 
 class StatusCard extends StatefulWidget {
 
@@ -25,6 +26,15 @@ class StatusCard extends StatefulWidget {
 class _StatusCardState extends State<StatusCard> {
 
   late String status_string;
+
+  refresh() {
+    widget.db.getCollection();
+    widget.db.updateData(widget.dbField);
+    setState(() {
+      widget.status = !widget.status;
+    });
+    updateStatus();
+  }
 
   updateStatus () {
     String S;
@@ -83,12 +93,11 @@ class _StatusCardState extends State<StatusCard> {
                     ),
                     TextButton(
                       onPressed: () {
-                        widget.db.getCollection();
-                        widget.db.updateData(widget.dbField);
-                        setState(() {
-                          widget.status = !widget.status;
-                        });
-                        updateStatus();
+                        showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => PopUp(name: widget.name, notifyParent: refresh,)
+                        );
+
                       },
                       child: Text(
                           "Mark as Completed",
@@ -111,3 +120,4 @@ class _StatusCardState extends State<StatusCard> {
     );
   }
 }
+
