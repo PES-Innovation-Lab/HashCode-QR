@@ -24,6 +24,7 @@ class _FlashState extends State<Flash> {
     return Container(
       color: Colors.green[400],
       child: IconButton(
+        padding: EdgeInsets.all(10),
         icon: flashIcon,
         color: Colors.black,
         onPressed: () async {

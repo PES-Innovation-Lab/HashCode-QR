@@ -105,9 +105,10 @@ class _StatusCardState extends State<StatusCard> {
                           color: Colors.green[400]
                         ),
                       ),
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.black
-                      ),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(Colors.black),
+                        padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                      )
                     )
                   ],
                 ),

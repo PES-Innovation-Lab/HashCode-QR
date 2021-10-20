@@ -58,13 +58,15 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.grey[900],
       body: Container(
         alignment: Alignment.center,
-        child: ListView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Container(
               height: 500,
                 width: 500,
                 child: buildQrView(context),
             ),
+            SizedBox(height: 50,),
             Center(
               child: Container(
                 padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
