@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hashcode_qr/services/database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hashcode_qr/widgets/no_data.dart';
 
 
 class Loading extends StatefulWidget {
@@ -25,7 +26,7 @@ class _LoadingState extends State<Loading> {
     await Firebase.initializeApp();
   }
 
-  nextScreen (User us) {
+  nextScreen (User? us) {
     Future.delayed(Duration(seconds: 1, milliseconds: 500), () {
       Navigator.popAndPushNamed(context, '/status', arguments: us);
     });
@@ -37,11 +38,20 @@ class _LoadingState extends State<Loading> {
     });
     db = DatabaseService(id: id);
     db.getCollection();
-    User us;
+    User? us;
     us = await db.getData();
-    _initFireBase();
-    print('db loaded');
-    nextScreen(us);
+    if (us == null) {
+      showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => noData()
+      );
+    }
+    else {
+      print('In loading: $us');
+      _initFireBase();
+      print('db loaded');
+      nextScreen(us);
+    }
   }
 
   @override
