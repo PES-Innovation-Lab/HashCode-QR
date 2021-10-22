@@ -52,4 +52,10 @@ class DatabaseService {
     var snapshot = await participantCollection.where('id', isEqualTo: this.id).get();
     await snapshot.docs[0].reference.update({field: !snapshot.docs[0][field]});
   }
+  setupParticipant(String name, String team) async {
+    print('$name $team');
+    var snapshot = await participantCollection.where('id', isEqualTo: this.id).get();
+    await snapshot.docs[0].reference.update({'name': name, 'team': team, 'checkIn': true});
+  }
+
 }

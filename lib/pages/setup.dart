@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hashcode_qr/services/database.dart';
+import 'package:hashcode_qr/widgets/confirmParticipant.dart';
 
 class Setup extends StatefulWidget {
 
@@ -12,8 +14,31 @@ class _SetupState extends State<Setup> {
   final nameController = TextEditingController();
   final teamController = TextEditingController();
 
+  late User user;
+  late DatabaseService db;
+
+  participantSetup() async {
+    db.getCollection();
+    await db.setupParticipant(nameController.text, teamController.text);
+    User us = await db.getData();
+    setState(() {
+      user = us;
+    });
+    Navigator.popAndPushNamed(context, '/status', arguments: user);
+  }
+
+  // Function to clear field on disposing widget
+  @override
+  void dispose() {
+    teamController.dispose();
+    nameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    user = ModalRoute.of(context)!.settings.arguments as User;
+    db = DatabaseService(id: user.id);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -107,6 +132,29 @@ class _SetupState extends State<Setup> {
                       fillColor: Colors.green[400],
                       filled: true,
                     ),
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: TextButton(
+                  onPressed: () {
+                    // showDialog<String>(
+                    //     context: context,
+                    //     builder: (BuildContext context) => confirmParticipant(notifyParent: participantSetup),
+                    // );
+                    participantSetup();
+                  },
+                  child: Text(
+                    "Submit",
+                    style: TextStyle(
+                        color: Colors.black
+                    ),
+                  ),
+                  style: TextButton.styleFrom(
+                      backgroundColor: Colors.green[400]
                   ),
                 ),
               ),
