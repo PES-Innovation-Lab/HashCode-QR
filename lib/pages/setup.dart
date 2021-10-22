@@ -145,7 +145,6 @@ class _SetupState extends State<Setup> {
                         context: context,
                         builder: (BuildContext context) => confirmParticipant(notifyParent: participantSetup),
                     );
-                    //participantSetup();
                   },
                   child: Text(
                     "Submit",
