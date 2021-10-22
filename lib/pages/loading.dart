@@ -31,6 +31,11 @@ class _LoadingState extends State<Loading> {
       Navigator.popAndPushNamed(context, '/status', arguments: us);
     });
   }
+  setUp (User? us) {
+    Future.delayed(Duration(seconds: 1, milliseconds: 500), () {
+      Navigator.popAndPushNamed(context, '/setup', arguments: us);
+    });
+  }
 
   pullData () async {
     setState(() {
@@ -45,6 +50,13 @@ class _LoadingState extends State<Loading> {
           context: context,
           builder: (BuildContext context) => noData()
       );
+    }
+    // If setup has to be done
+    else if (us.name == 'none' && us.team == 'none'){
+      print('In loading: $us');
+      _initFireBase();
+      print('db loaded');
+      setUp(us);
     }
     else {
       print('In loading: $us');

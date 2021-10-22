@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hashcode_qr/pages/home.dart';
 import 'package:hashcode_qr/pages/status.dart';
 import 'package:hashcode_qr/pages/loading.dart';
+import 'package:hashcode_qr/pages/setup.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 
@@ -19,6 +20,7 @@ class Load extends StatelessWidget {
         '/home': (context) => Home(),
         '/loading': (context) => Loading(),
         '/status': (context) => Status(),
+        '/setup': (context) => Setup(),
       },
       home: FutureBuilder(
         future: _fbapp,
