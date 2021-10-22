@@ -141,11 +141,11 @@ class _SetupState extends State<Setup> {
                 padding: EdgeInsets.all(10),
                 child: TextButton(
                   onPressed: () {
-                    // showDialog<String>(
-                    //     context: context,
-                    //     builder: (BuildContext context) => confirmParticipant(notifyParent: participantSetup),
-                    // );
-                    participantSetup();
+                    showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => confirmParticipant(notifyParent: participantSetup),
+                    );
+                    //participantSetup();
                   },
                   child: Text(
                     "Submit",
