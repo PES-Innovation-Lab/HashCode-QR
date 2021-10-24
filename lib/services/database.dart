@@ -50,7 +50,7 @@ class DatabaseService {
   updateData(String field) async {
     print(field);
     var snapshot = await participantCollection.where('id', isEqualTo: this.id).get();
-    await snapshot.docs[0].reference.update({field: !snapshot.docs[0][field]});
+    await snapshot.docs[0].reference.update({field: true});
   }
   setupParticipant(String name, String team) async {
     print('$name $team');

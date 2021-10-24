@@ -45,6 +45,7 @@ class _LoadingState extends State<Loading> {
     db.getCollection();
     User? us;
     us = await db.getData();
+    print('${us?.name} ${us?.team}');
     if (us == null) {
       showDialog<String>(
           context: context,
